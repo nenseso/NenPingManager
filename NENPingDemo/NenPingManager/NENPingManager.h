@@ -20,12 +20,13 @@
 
 @end
 
+typedef void(^CompletionHandler)(NSString *, NSArray *);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NENPingManager : NSObject
 
-- (void)getFatestAddress:(NSArray *)addressList completionHandler:(void(^)(NSString *))completionHandler;
+- (void)getFatestAddress:(NSArray *)addressList completionHandler:(CompletionHandler)completionHandler;
 
 @end
 

@@ -13,9 +13,9 @@
 		CE32B8B921DF03770065856D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE32B8B821DF03770065856D /* Assets.xcassets */; };
 		CE32B8BC21DF03770065856D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE32B8BA21DF03770065856D /* LaunchScreen.storyboard */; };
 		CE32B8BF21DF03770065856D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE32B8BE21DF03770065856D /* main.m */; };
-		CE32B8CB21DF03BF0065856D /* NENPingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE32B8CA21DF03BF0065856D /* NENPingManager.m */; };
 		CE32B8CE21DF047C0065856D /* NENSinglePinger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE32B8CD21DF047C0065856D /* NENSinglePinger.m */; };
 		CE32B8D721E0951E0065856D /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE32B8D521E0951D0065856D /* SimplePing.m */; };
+		CEFDB78721E87F8E00BA9012 /* NENPingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDB78621E87F8E00BA9012 /* NENPingManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,12 +29,12 @@
 		CE32B8BB21DF03770065856D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE32B8BD21DF03770065856D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE32B8BE21DF03770065856D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CE32B8C921DF03BF0065856D /* NENPingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NENPingManager.h; sourceTree = "<group>"; };
-		CE32B8CA21DF03BF0065856D /* NENPingManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NENPingManager.m; sourceTree = "<group>"; };
 		CE32B8CC21DF047C0065856D /* NENSinglePinger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NENSinglePinger.h; sourceTree = "<group>"; };
 		CE32B8CD21DF047C0065856D /* NENSinglePinger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NENSinglePinger.m; sourceTree = "<group>"; };
 		CE32B8D521E0951D0065856D /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
 		CE32B8D621E0951D0065856D /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		CEFDB78621E87F8E00BA9012 /* NENPingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NENPingManager.m; sourceTree = "<group>"; };
+		CEFDB78821E87FA000BA9012 /* NENPingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NENPingManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +88,8 @@
 				CE32B8D521E0951D0065856D /* SimplePing.m */,
 				CE32B8CC21DF047C0065856D /* NENSinglePinger.h */,
 				CE32B8CD21DF047C0065856D /* NENSinglePinger.m */,
-				CE32B8C921DF03BF0065856D /* NENPingManager.h */,
-				CE32B8CA21DF03BF0065856D /* NENPingManager.m */,
+				CEFDB78821E87FA000BA9012 /* NENPingManager.h */,
+				CEFDB78621E87F8E00BA9012 /* NENPingManager.m */,
 			);
 			path = NenPingManager;
 			sourceTree = "<group>";
@@ -165,7 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE32B8B421DF03770065856D /* ViewController.m in Sources */,
-				CE32B8CB21DF03BF0065856D /* NENPingManager.m in Sources */,
+				CEFDB78721E87F8E00BA9012 /* NENPingManager.m in Sources */,
 				CE32B8CE21DF047C0065856D /* NENSinglePinger.m in Sources */,
 				CE32B8BF21DF03770065856D /* main.m in Sources */,
 				CE32B8D721E0951E0065856D /* SimplePing.m in Sources */,

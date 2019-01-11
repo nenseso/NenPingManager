@@ -25,7 +25,7 @@
                                @"www.hao123.com"
                                ];
     self.pingManager = [[NENPingManager alloc] init];
-    [self.pingManager getFatestAddress:hostNameArray completionHandler:^(NSString * _Nonnull hostName) {
+    [self.pingManager getFatestAddress:hostNameArray completionHandler:^(NSString *hostName, NSArray *sortedAddress) {
         NSLog(@"fastest IP: %@",hostName);
     }];
 }

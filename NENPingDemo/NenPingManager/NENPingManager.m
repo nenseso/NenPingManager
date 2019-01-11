@@ -44,7 +44,7 @@
 
 @implementation NENPingManager
 
-- (void)getFatestAddress:(NSArray *)addressList completionHandler:(void(^)(NSString *))completionHandler
+- (void)getFatestAddress:(NSArray *)addressList completionHandler:(CompletionHandler)completionHandler
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         if (addressList.count == 0) {
@@ -55,6 +55,10 @@
         self.singlePingerArray = singlePingerArray;
         NSMutableArray *needRemoveAddressArray = [NSMutableArray array];
         NSMutableArray *resultArray = [NSMutableArray array];
+        NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+        for (NSString *address in addressList) {
+            [resultDict setObject:[NSNull null] forKey:address];
+        }
         dispatch_group_t group = dispatch_group_create();
         
         for (NSString *address in addressList) {
@@ -70,9 +74,15 @@
                     }
                     case NENSinglePingStatusDidReceivePacket:
                     {
-                        NENAddressItem *item = [[NENAddressItem alloc] initWithHostName:pingitem.hostName];
+                        NENAddressItem *item = [resultDict objectForKey:pingitem.hostName];
+                        if ([item isEqual:[NSNull null]]) {
+                            item = [[NENAddressItem alloc] initWithHostName:pingitem.hostName];
+                        }
                         [item.delayTimes addObject:@(pingitem.millSecondsDelay)];
-                        [resultArray addObject:item];
+                        [resultDict setObject:item forKey:pingitem.hostName];
+                        if (![resultArray containsObject:item]) {
+                            [resultArray addObject:item];
+                        }
                         break;
                     }
                     case NENSinglePingStatusDidReceiveUnexpectedPacket:
@@ -80,9 +90,15 @@
                     case NENSinglePingStatusDidTimeOut:
                     {
                         // 超时按1s计算
-                        NENAddressItem *item = [[NENAddressItem alloc] initWithHostName:pingitem.hostName];
+                        NENAddressItem *item = [resultDict objectForKey:pingitem.hostName];
+                        if ([item isEqual:[NSNull null]]) {
+                            item = [[NENAddressItem alloc] initWithHostName:pingitem.hostName];
+                        }
                         [item.delayTimes addObject:@(1000.0)];
-                        [resultArray addObject:item];
+                        [resultDict setObject:item forKey:pingitem.hostName];
+                        if (![resultArray containsObject:item]) {
+                            [resultArray addObject:item];
+                        }
                         break;
                     }
                     case NENSinglePingStatusDidError:
@@ -118,7 +134,7 @@
             }
             
             if (resultArray.count == 0) {
-                completionHandler(nil);
+                completionHandler(nil,nil);
                 return;
             }
             
@@ -126,9 +142,13 @@
                 return item1.delayMillSeconds > item2.delayMillSeconds;
             }];
             
+            NSMutableArray *array = [NSMutableArray array];
+            for (NENAddressItem *item in resultArray) {
+                [array addObject:item.hostName];
+            }
             NENAddressItem *item = resultArray.firstObject;
             NSLog(@"最快的地址速度是: %.2f ms",item.delayMillSeconds);
-            completionHandler(item.hostName);
+            completionHandler(item.hostName, [array copy]);
         });
     }];
 }
