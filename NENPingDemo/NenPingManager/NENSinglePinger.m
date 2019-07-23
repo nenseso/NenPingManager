@@ -102,7 +102,11 @@
     [self cancelRunLoopPerformTimeOut];
     
     self.hostName = nil;
-    [self.startDateArray removeAllObjects];
+    if (status == NENSinglePingStatusDidFailToSendPacket) {
+        [self.startDateArray removeLastObject];
+    } else {
+        [self.startDateArray removeAllObjects];
+    }
     self.pingCallBack = nil;
 }
 
@@ -161,7 +165,12 @@
 - (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet sequenceNumber:(uint16_t)sequenceNumber
 {
     [self cancelRunLoopPerformTimeOut];
-    double millSecondsDelay = [[NSDate date] timeIntervalSinceDate:self.startDateArray[self.dateSendIndex]] * 1000;
+    double millSecondsDelay = 0;
+    if (self.startDateArray.count <= self.dateSendIndex) {
+        millSecondsDelay = 1.f;
+    } else {
+        millSecondsDelay = [[NSDate date] timeIntervalSinceDate:self.startDateArray[self.dateSendIndex]] * 1000;
+    }
     self.dateSendIndex++;
     self.receivedOrDelayCount++;
     NSLog(@"%@ %hu received, size=%lu time=%.2f",self.hostName, sequenceNumber, (unsigned long)packet.length, millSecondsDelay);
