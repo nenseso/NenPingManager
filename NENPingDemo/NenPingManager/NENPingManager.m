@@ -91,14 +91,15 @@
                     {
                         // 超时按1s计算
                         NENAddressItem *item = [resultDict objectForKey:pingitem.hostName];
-                        if ([item isEqual:[NSNull null]]) {
+                        if (!item||[item isEqual:[NSNull null]]) {
                             item = [[NENAddressItem alloc] initWithHostName:pingitem.hostName];
                         }
-                        [item.delayTimes addObject:@(1000.0)];
-                        [resultDict setObject:item forKey:pingitem.hostName];
-                        if (![resultArray containsObject:item]) {
-                            [resultArray addObject:item];
+                            [item.delayTimes addObject:@(1000.0)];
+                            [resultDict setObject:item forKey:pingitem.hostName];
+                            if (![resultArray containsObject:item]) {
+                                [resultArray addObject:item];
                         }
+
                         break;
                     }
                     case NENSinglePingStatusDidError:

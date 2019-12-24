@@ -72,7 +72,10 @@
         NENPingItem *pingItem = [[NENPingItem alloc] init];
         pingItem.hostName = self.hostName;
         pingItem.status = NENSinglePingStatusDidTimeOut;
-        self.pingCallBack(pingItem);
+        if(self.pingCallBack){
+            self.pingCallBack(pingItem);
+        }
+
         if (self.receivedOrDelayCount == self.needPingCount) {
             [self stop];
         }
@@ -101,13 +104,11 @@
     
     [self cancelRunLoopPerformTimeOut];
     
-    self.hostName = nil;
     if (status == NENSinglePingStatusDidFailToSendPacket) {
         [self.startDateArray removeLastObject];
     } else {
         [self.startDateArray removeAllObjects];
     }
-    self.pingCallBack = nil;
 }
 
 - (void)sendPing
@@ -139,7 +140,9 @@
     NENPingItem *pingItem = [[NENPingItem alloc] init];
     pingItem.hostName = self.hostName;
     pingItem.status = NENSinglePingStatusDidStart;
-    self.pingCallBack(pingItem);
+    if(self.pingCallBack){
+        self.pingCallBack(pingItem);
+    }
 }
 
 - (void)simplePing:(SimplePing *)pinger didFailWithError:(NSError *)error
